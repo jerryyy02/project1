@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;  
+using System.Configuration;
+
+namespace Nishu
+{
+    public partial class login : System.Web.UI.Page
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=192.168.10.99;Initial Catalog=AIIA_IHMS_DEV;User ID=auser; password=aiia@321");
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            String uid = email.Text;
+            String password = pass.Text;
+            con.Open();
+            string qry = "select * from nishu where email='" + uid + "' and pass='" + password + "'";
+            SqlCommand cmd = new SqlCommand(qry, con);
+            SqlDataReader sdr = cmd.ExecuteReader();
+            if (sdr.Read())
+            {
+                ClientScript.RegisterStartupScript(Page.GetType(), "validation", "<script language='javascript'>alert('Login Sucess......!!')</script>");
+               
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(Page.GetType(), "validation", "<script language='javascript'>alert('Invalid Username and Password')</script>");
+            }
+            con.Close();
+        }
+    }
+}
