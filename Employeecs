@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using NishuMVC.LocalResource;
+
+namespace NishuMVC.Models
+{
+    public class Employee
+    {
+        public int ID { get; set; }
+
+        [Display(Name = "Name", ResourceType = typeof(Resource))]
+        public string Name { get; set; }
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",
+
+        ApplyFormatInEditMode = true)]
+        [Display(Name = "JoiningDate", ResourceType = typeof(Resource))]
+        public DateTime JoiningDate { get; set; }
+        [Display(Name = "Age", ResourceType = typeof(Resource))]
+        public int Age { get; set; }
+        [Display(Name = "City", ResourceType = typeof(Resource))]
+        public string City { get; set; }
+    }
+
+    public class EmpDBContext : DbContext
+    {
+        public EmpDBContext()
+        { }
+        public DbSet<Employee> Employees { get; set; }
+    }
+}
