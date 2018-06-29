@@ -1,0 +1,257 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="aspweb.aspx.cs" Inherits="aspweb" UnobtrusiveValidationMode="None" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Project2</title>
+    <link href="StyleSheet.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css"
+        rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[id*=gridService]').footable();
+        });
+
+        function userValid() {
+            var fname, email, dob, mobile, mobExp, emailExp, address, city;
+
+            fname = document.getElementById("fname").value;
+            email = document.getElementById("email").value;
+            pass = document.getElementById("pass").value;
+            cpass = document.getElementById("cpass").value;
+            dob = document.getElementById("dob").value;
+            mobile = document.getElementById("mobile").value;
+            address = document.getElementById("address").value;
+            passExp = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,16})/;
+            mobExp = /^(?=.*[0-9])(?=.{10,})/;
+            emailExp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([com\co\.\in])+$/; // to validate email id
+
+            if (fname == '' && email == '' && dob == '' && mobile == '' && address == '' && pass == '' && cpass == '') {
+                alert("Enter All Fields");
+                return false;
+            }
+
+            if (fname == '') {
+                alert("Please Enter First Name");
+                return false;
+            }
+
+            if (email == '') {
+                alert("Please Enter Email");
+                return false;
+            }
+
+            if (pass == '') {
+                alert("Please Enter Password");
+                return false;
+            }
+
+            if (cpass == '') {
+                alert("This Field is Required");
+                return false;
+            }
+
+            if (dob == '') {
+                alert("Please Enter D.O.B");
+                return false;
+            }
+
+            if (mobile == '') {
+                alert("Please Enter Mobile No.");
+                return false;
+            }
+
+            if (address == '') {
+                alert("Please Enter Address");
+                return false;
+            }
+
+            if (email != '') {
+                if (!email.match(emailExp)) {
+                    alert("Invalid Email Id");
+                    return false;
+                }
+            }
+
+            if (mobile != '') {
+                if (!mobile.match(mobExp)) {
+                    alert("Invalid Mobile No.");
+                    return false;
+                }
+            }
+
+            if (mobile != '') {
+                if (!(mobile.charAt(0) == 9 || mobile.charAt(0) == 8 || mobile.charAt(0) == 7)) {
+                    alert("Invalid Mobile No.");
+                    return false;
+                }
+            }
+
+            if (cpass != pass) {
+                    alert("Password Doesn't match");
+                    return false;
+            }
+
+            if (pass != '') {
+                
+                    if (!pass.match(passExp)) {
+                        alert("Password must be of 8-16 characters length and contain alphabets, numbers and at least one special character...");
+                        return false;
+                    }
+                
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="heading">Registration Form</div>
+    </div>
+    <form id="form1" runat="server">
+        <div class="formdiv">
+            <div class="form">
+                <table border="0">
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label6" runat="server" Text="First Name:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="fname" CssClass="inputbox" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label7" runat="server" Text="Last Name:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="lname" CssClass="inputbox" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label8" runat="server" Text="Email:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="email" CssClass="inputbox" runat="server" TextMode="Email" AutoCompleteType="Disabled"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label9" runat="server" Text="Password:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="pass" CssClass="inputbox" runat="server" TextMode="Password" ValidationGroup="RegisterCheck"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label10" runat="server" Text="Confirm Password:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="cpass" CssClass="inputbox" runat="server" TextMode="Password"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label11" runat="server" Text="Date of Birth:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="dob" CssClass="inputbox" runat="server" AutoCompleteType="Disabled" TextMode="Date"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label12" runat="server" Text="Mobile No.:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="mobile" CssClass="inputbox" runat="server" MaxLength="10" TextMode="Phone" AutoCompleteType="Disabled"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Label13" runat="server" Text="Address:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="address" runat="server" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="btn_submit" CssClass="sbutton" Text="Submit" runat="server" OnClick="btn_submit_Click"  OnClientClick="return userValid();"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <asp:GridView ID="gridService" class=" gridbox footable" runat="server" Width="100%" OnRowCommand="GridService_RowCommand" AutoGenerateColumns="false" BackColor="#DCDCDC" BorderStyle="None" CellPadding="5" DataKeyNames="id" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" PageSize="5">
+            <HeaderStyle CssClass="grid-header" />
+            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/> 
+            <Columns>
+                <asp:TemplateField HeaderText="S.No." SortExpression="S.No.">
+                    <ItemTemplate>
+                        <asp:Label ID="Label0" runat="server" Text='<%# Bind("id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="First Name" SortExpression="firstname">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("fname") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Last Name" SortExpression="lastname">
+                    <ItemTemplate>
+                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("lname") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Email" SortExpression="email">
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("email") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DOB" SortExpression="dob">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("dob") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Mobile No." SortExpression="mobile">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("mobile") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Address" SortExpression="name">
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("address") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CommandArgument='<%# Eval("id") %>' />
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:LinkButton ID="btn_Update" runat="server" Text="Update" CommandName="Update" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' />
+                        <asp:LinkButton ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CommandArgument='<%# ((GridViewRow) Container).RowIndex %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("id") %>' OnClientClick="return confirm('Are you sure?')"/>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+            </Columns>
+        </asp:GridView>
+
+    </form>
+</body>
+</html>
