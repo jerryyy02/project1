@@ -1,0 +1,94 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="Nishu.register" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Register</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table border="0">
+            <tr>
+                <td>
+                    <asp:Label ID="name" runat="server" Text="Name:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="name_b" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="email" runat="server" Text="Email:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="email_b" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="pass" runat="server" Text="Password:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="pass_b" runat="server" TextMode="Password"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="conpass" runat="server" Text="Confirm Password:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="conpass_b" runat="server" TextMode="Password"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="dob" runat="server" Text="D.O.B:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="dob_b" runat="server" TextMode="Date"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="mobile" runat="server" Text="Mobile No.:"></asp:Label>
+                </td>
+                <td>
+                    <asp:TextBox ID="mobile_b" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="country" runat="server" Text="Country:"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="country_b" runat="server"></asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="state" runat="server" Text="State"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="state_b" runat="server"></asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="city" runat="server" Text="City"></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList ID="city_b" runat="server"></asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="bt_submit" runat="server" Text="Submit" OnClick="bt_submit_Click"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
