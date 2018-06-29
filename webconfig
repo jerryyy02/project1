@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+
+<configuration>
+
+  <connectionStrings>
+    <add name="DBCS"
+    connectionString="Data Source=192.168.10.99;Initial Catalog=AIIA_IHMS_DEV;User ID=auser; password=aiia@321"
+    providerName="System.Data.SqlClient" />
+  </connectionStrings>
+
+    <system.web>
+      <compilation debug="true" targetFramework="4.5.2" />
+      <httpRuntime targetFramework="4.5.2" />
+    </system.web>
+
+</configuration>
