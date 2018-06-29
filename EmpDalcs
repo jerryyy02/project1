@@ -1,0 +1,51 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+
+namespace Dal
+{
+    public class EmpDal
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=192.168.10.99;Initial Catalog=AIIA_IHMS_DEV;User ID=auser; password=aiia@321");
+        public DataSet rowdata(int index)
+        {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("Select * from mytable where id=" + index + "", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "aspweb");
+                con.Close();
+                return ds;
+               
+         }
+        public DataSet showdata()
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Select * from mytable", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "aspweb");
+            con.Close();
+            return ds;
+        }
+
+        public void deletedata(int userid)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("delete FROM mytable where id='" + userid + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public void popup()
+        {
+
+        }
+    }
+}
+
