@@ -1,0 +1,221 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GridControl.aspx.cs" Inherits="nishu2.GridControl" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Grid Control</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/css/footable.min.css"
+        rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/0.1.0/js/footable.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('[id*=gridService]').footable();
+        });
+
+        function userValid() {
+            var fname, email, dob, mobile, mobExp, emailExp, address, city;
+
+            fname = document.getElementById("TextBox1").value;
+            email = document.getElementById("TextBox3").value;
+            dob = document.getElementById("TextBox4").value;
+            mobile = document.getElementById("TextBox5").value;
+            address = document.getElementById("TextBox6").value;
+            city = document.getElementById("TextBox7").value;
+            emailExp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([com\co\.\in])+$/; // to validate email id
+
+            if (fname == '' && email == '' && dob == '' && mobile == '' && address == '' && city == '') {
+                alert("Enter All Fields");
+                return false;
+            }
+
+            if (fname == '') {
+                alert("Please Enter Name");
+                return false;
+            }
+
+            if (email == '') {
+                alert("Please Enter Email");
+                return false;
+            }
+
+            if (dob == '') {
+                alert("Please Enter D.O.B");
+                return false;
+            }
+
+            if (mobile == '') {
+                alert("Please Enter Mobile No.");
+                return false;
+            }
+
+            if (address == '') {
+                alert("Please Enter Address");
+                return false;
+            }
+
+            if (city == '') {
+                alert("Please Enter City");
+                return false;
+            }
+
+            if (email == '') {
+                alert("Please Enter Email");
+                return false;
+            }
+
+            if (email != '') {
+                if (!email.match(emailExp)) {
+                    alert("Invalid Email Id");
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+    <style>
+        .TexBox1{
+            position:absolute;
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+
+        <asp:GridView ID="gridService" ShowFooter="true" CssClass="footable" runat="server" Width="100%" OnRowCommand="GridService_RowCommand"  AutoGenerateColumns="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting" OnRowDataBound="GridView1_RowDataBound" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" AllowPaging="True" PageSize="5">
+            <Columns>
+                <asp:TemplateField HeaderText="S.No." SortExpression="S.No.">
+                    <ItemTemplate>
+                        <asp:Label ID="Label0" runat="server" Text='<%# Bind("id") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Full Name" SortExpression="fullname">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("fname") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("fname") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="valid1" runat="server" ErrorMessage="Please Enter Full Name" ControlToValidate="TextBox1" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="fname" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="validFname" runat="server" ErrorMessage="Please Enter Full Name" ControlToValidate="fname" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Email" SortExpression="email">
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("email") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("email") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="valid2" runat="server" ErrorMessage="Please Enter Email" ControlToValidate="TextBox3" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid email id!" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="TextBox3" ForeColor="red" Display="None" ValidationGroup="Upvalid"/>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="email" runat="server" AutoCompleteType="Disabled" TextMode="Email"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="validEmail" runat="server" ErrorMessage="Please Enter Email" ControlToValidate="email" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid email id!" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="email" ForeColor="red" Display="None" ValidationGroup="Addvalid"/>
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="D.O.B" SortExpression="dob">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("dob") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("dob") %>' TextMode="Date"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="valid3" runat="server" ErrorMessage="Please Enter D.O.B" ControlToValidate="TextBox4" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="dob" runat="server" AutoCompleteType="Disabled" TextMode="Date"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="validdob" runat="server" ErrorMessage="Please Enter D.O.B" ControlToValidate="dob" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Mobile No." SortExpression="mobile">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("mobile") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("mobile") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="valid4" runat="server" ErrorMessage="Please Enter mobile No." ControlToValidate="TextBox5" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="validmono" runat="server" ControlToValidate="TextBox5" ErrorMessage="Mobile No. is not Valid" ValidationExpression="[0-9]{10}" Display="None" ValidationGroup="Upvalid"></asp:RegularExpressionValidator>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="mobile" runat="server" MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="validMobile" runat="server" ErrorMessage="Please Enter mobile No." ControlToValidate="mobile" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="validNo" runat="server" ControlToValidate="mobile" ErrorMessage="Mobile No. is not Valid" ValidationExpression="[0-9]{10}" Display="None" ValidationGroup="Addvalid"></asp:RegularExpressionValidator>  
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Address" SortExpression="address">
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("address") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("address") %>'></asp:TextBox>
+                         <asp:RequiredFieldValidator ID="valid5" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="TextBox6" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:TextBox ID="address" runat="server" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="validAddress" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="address" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="City" SortExpression="city">
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("city") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:DropDownList ID="TextBox7" runat="server" Text='<%# Bind("city") %>'>
+                            <asp:ListItem>--CITY--</asp:ListItem>
+                            <asp:ListItem>New Delhi</asp:ListItem>
+                            <asp:ListItem>Noida</asp:ListItem>
+                            <asp:ListItem>Greater Noida</asp:ListItem>
+                            <asp:ListItem>Gurugram</asp:ListItem>
+                            <asp:ListItem>Shilampur</asp:ListItem>
+                            <asp:ListItem>Jaipur</asp:ListItem>
+                            <asp:ListItem>Rajiv Chowk</asp:ListItem>
+                        </asp:DropDownList>
+                         <asp:RequiredFieldValidator ID="valid6" runat="server" ErrorMessage="Please Select City" ControlToValidate="TextBox7" ForeColor="red" Display="None" ValidationGroup="Upvalid"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                    <FooterTemplate>
+                        <asp:DropDownList ID="city" runat="server">
+                            <asp:ListItem>--CITY--</asp:ListItem>
+                            <asp:ListItem>New Delhi</asp:ListItem>
+                            <asp:ListItem>Noida</asp:ListItem>
+                            <asp:ListItem>Greater Noida</asp:ListItem>
+                            <asp:ListItem>Gurugram</asp:ListItem>
+                            <asp:ListItem>Shilampur</asp:ListItem>
+                            <asp:ListItem>Jaipur</asp:ListItem>
+                            <asp:ListItem>Rajiv Chowk</asp:ListItem>
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="validCity" runat="server" ErrorMessage="Please Enter City" ControlToValidate="city" ForeColor="red" Display="None" ValidationGroup="Addvalid"></asp:RequiredFieldValidator>
+                    </FooterTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" CommandArgument='<%# Eval("id") %>' />
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <asp:LinkButton ID="btn_add" runat="server" Text="Add" CommandName="Add" ValidationGroup="Addvalid"/>
+                    </FooterTemplate>
+                    <EditItemTemplate>
+                        <asp:LinkButton ID="btn_Update" runat="server" Text="Update" CommandName="Update" CommandArgument='<%# Eval("id") %>' ValidationGroup="Upvalid" OnClientClick="userValid()"/>
+                        <asp:LinkButton ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" CommandArgument='<%# Eval("id") %>' />
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete" CommandArgument='<%# Eval("id") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+            </Columns>
+           
+        </asp:GridView>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="red" ValidationGroup="Addvalid"/>
+        <asp:ValidationSummary ID="ValidationSummary2" runat="server" ForeColor="red" ValidationGroup="Upvalid"/>
+    </div>
+    </form>
+</body>
+</html>
