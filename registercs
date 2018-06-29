@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Nishu
+{
+    public partial class register : System.Web.UI.Page
+    {
+        SqlConnection con = new SqlConnection(@"Data Source=192.168.10.99;Initial Catalog=AIIA_IHMS_DEV;User ID=auser; password=aiia@321");
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void bt_submit_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = con.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insert into nishu values('" + name_b.Text + "', '" + email_b.Text + "', '" + pass_b.Text + "')";
+            cmd.ExecuteNonQuery();
+            con.Close();
+           
+            string message = "Your details have been saved successfully.";
+            string script = "window.onload = function(){ alert('";
+            script += message;
+            script += "');";
+            script += "window.location = '";
+            script += Request.Url.AbsoluteUri;
+            script += "'; }";
+            ClientScript.RegisterStartupScript(this.GetType(), "SuccessMessage", script, true);
+            Response.Redirect("login.aspx");
+        }
+    }
+}
